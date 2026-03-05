@@ -3,70 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>엑티브 AI 실전 교육 신청</title>
+    <title>LG U+ AI 실전 교육 신청</title>
     <style>
-        :root { --uplus-magenta: #E6007E; --uplus-dark: #333; }
-        body { font-family: 'Pretendard', -apple-system, sans-serif; margin: 0; background: #fdfdfd; color: var(--uplus-dark); }
-        .header { background: var(--uplus-magenta); color: white; text-align: center; padding: 50px 20px; border-radius: 0 0 30px 30px; }
-        .container { max-width: 500px; margin: -40px auto 60px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
-        h1 { font-size: 1.6rem; margin: 10px 0; letter-spacing: -1px; }
-        .curriculum-card { background: #fff0f7; padding: 20px; border-radius: 12px; margin: 25px 0; }
-        .curriculum-card h3 { color: var(--uplus-magenta); margin-top: 0; font-size: 1.1rem; }
-        .curriculum-card ul { list-style: none; padding: 0; font-size: 0.95rem; }
-        .curriculum-card li { margin: 10px 0; padding-left: 20px; position: relative; }
-        .curriculum-card li::before { content: '✓'; position: absolute; left: 0; color: var(--uplus-magenta); font-weight: bold; }
+        :root { --uplus-magenta: #E6007E; --uplus-dark: #333; --light-pink: #FFF0F7; }
+        body { font-family: 'Pretendard', -apple-system, sans-serif; margin: 0; background: #F8F9FA; color: var(--uplus-dark); letter-spacing: -0.5px; }
         
+        /* 헤더 영역 */
+        .header { background: var(--uplus-magenta); color: white; text-align: center; padding: 45px 20px 60px; border-radius: 0 0 40px 40px; }
+        .header p { margin: 0; font-weight: 600; opacity: 0.8; font-size: 0.9rem; text-transform: uppercase; }
+        .header h1 { font-size: 1.8rem; margin: 10px 0 0; font-weight: 800; line-height: 1.3; }
+
+        .container { max-width: 500px; margin: -40px auto 60px; background: white; padding: 30px; border-radius: 24px; box-shadow: 0 15px 35px rgba(230, 0, 126, 0.1); border: 1px solid #eee; box-sizing: border-box; }
+
+        /* [핵심] 교육 정보 하이라이트 박스 */
+        .info-box { background: #333; color: white; padding: 20px; border-radius: 16px; margin-bottom: 25px; }
+        .info-item { display: flex; align-items: flex-start; margin-bottom: 12px; }
+        .info-item:last-child { margin-bottom: 0; }
+        .info-label { width: 70px; font-weight: bold; color: var(--uplus-magenta); font-size: 0.9rem; }
+        .info-value { flex: 1; font-weight: 500; font-size: 1rem; }
+
+        /* 커리큘럼 영역 */
+        .curriculum-card { background: var(--light-pink); padding: 20px; border-radius: 16px; margin-bottom: 30px; }
+        .curriculum-card h3 { color: var(--uplus-magenta); margin-top: 0; font-size: 1.1rem; border-bottom: 2px solid rgba(230, 0, 126, 0.1); padding-bottom: 10px; }
+        .curriculum-card ul { list-style: none; padding: 0; margin: 10px 0 0; }
+        .curriculum-card li { margin: 12px 0; padding-left: 24px; position: relative; font-weight: 500; font-size: 0.95rem; }
+        .curriculum-card li::before { content: '✔'; position: absolute; left: 0; color: var(--uplus-magenta); }
+        
+        /* 입력 폼 스타일 */
         .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
-        input, textarea { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: var(--uplus-magenta); outline: none; box-shadow: 0 0 8px rgba(230, 0, 126, 0.1); }
+        label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; color: #444; }
+        input, textarea { width: 100%; padding: 15px; border: 1.5px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; transition: 0.3s; background: #fafafa; }
+        input:focus { border-color: var(--uplus-magenta); outline: none; background: white; box-shadow: 0 0 10px rgba(230, 0, 126, 0.1); }
         
-        button { width: 100%; padding: 16px; background: var(--uplus-magenta); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        button { width: 100%; padding: 18px; background: var(--uplus-magenta); color: white; border: none; border-radius: 12px; font-size: 1.15rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        button:hover { background: #c00069; transform: translateY(-2px); }
         button:active { transform: scale(0.98); }
-        .loading { display: none; text-align: center; color: var(--uplus-magenta); font-weight: bold; }
+        .loading { display: none; text-align: center; color: var(--uplus-magenta); font-weight: bold; padding: 10px; }
+        
+        .contact-info { text-align: center; font-size: 0.85rem; color: #888; margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; opacity: 0.9;">LG U+ Sales Intelligence</div>
-    <h1>영업사원을 위한 AI 실전 교육</h1>
+    <p>LG U+ Sales Special Course</p>
+    <h1>영업사원을 위한<br>AI 실전 활용 교육</h1>
 </div>
 
 <div class="container">
+    <div class="info-box">
+        <div class="info-item">
+            <span class="info-label">📅 일 정</span>
+            <span class="info-value">3월 11일 (수) 오후 6시 20분</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">📍 장 소</span>
+            <span class="info-value">엑티브 4층 뉴욕 회의실</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">👤 담 당</span>
+            <span class="info-value">마케팅팀 안종선 과장</span>
+        </div>
+    </div>
+
     <div class="curriculum-card">
-        <h3>🚀 이런 내용을 배웁니다</h3>
+        <h3>🚀 실무 중심 커리큘럼</h3>
         <ul>
             <li>AI로 잠재고객 발굴하기</li>
             <li>AI로 TM 스크립트 만들기</li>
             <li>맞춤형 제안서 기획하기</li>
             <li>컨택 메시지 쓰기</li>
             <li>제안 메일 보내기 & 후속관리</li>
-            <li>미팅내용 써머리</li>
-            <li>활용 시 주의사항</li>
+            <li>미팅 내용 써머리 (자동 요약)</li>
+            <li>활용 시 주의사항 (보안 가이드)</li>
         </ul>
     </div>
 
     <form id="applyForm">
         <div class="form-group">
             <label>성함</label>
-            <input type="text" name="name" placeholder="성함을 입력해주세요" required>
+            <input type="text" name="name" placeholder="성함을 입력하세요" required>
         </div>
         <div class="form-group">
-            <label>소속 부서</label>
-            <input type="text" name="department" placeholder="부서명을 입력해주세요" required>
+            <label>부서</label>
+            <input type="text" name="department" placeholder="소속 부서를 입력하세요" required>
         </div>
         <div class="form-group">
             <label>AI 교육에서 궁금한 점</label>
-            <textarea name="question" rows="3" placeholder="예: 영업 제안서 자동화 방법이 궁금합니다."></textarea>
+            <textarea name="question" rows="3" placeholder="교육 시 답변이 필요한 내용을 적어주세요."></textarea>
         </div>
-        <button type="submit" id="submitBtn">신청 완료하기</button>
-        <div id="loader" class="loading">잠시만 기다려주세요...</div>
+        <button type="submit" id="submitBtn">교육 신청하기</button>
+        <div id="loader" class="loading">데이터 전송 중...</div>
     </form>
+
+    <div class="contact-info">
+        문의: 마케팅팀 안종선 과장<br>
+        © 2024 LG Uplus AI Training Page
+    </div>
 </div>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzEtymEy--JlC5OlfsC3-dxjqtr8pQEc7_XPOQ9-l8CDqAbEnH4HmsWHHclEq__TKAxbw/exec'; // 1단계의 URL로 교체하세요!
+    // ⚠️ 1단계에서 만든 본인의 웹 앱 URL로 반드시 교체하세요!
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzEtymEy--JlC5OlfsC3-dxjqtr8pQEc7_XPOQ9-l8CDqAbEnH4HmsWHHclEq__TKAxbw/exec'; 
     const form = document.getElementById('applyForm');
     const btn = document.getElementById('submitBtn');
     const loader = document.getElementById('loader');
@@ -78,13 +116,13 @@
 
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
-                alert('신청이 성공적으로 완료되었습니다! 교육 때 뵙겠습니다.');
+                alert('신청이 성공적으로 완료되었습니다. 교육 당일에 뵙겠습니다!');
                 form.reset();
                 btn.style.display = 'block';
                 loader.style.display = 'none';
             })
             .catch(error => {
-                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+                alert('연결 오류가 발생했습니다. 담당자에게 문의해 주세요.');
                 btn.style.display = 'block';
                 loader.style.display = 'none';
             });
